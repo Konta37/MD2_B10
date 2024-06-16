@@ -128,10 +128,21 @@ public class MenuCategory {
         int CategoryId = Integer.parseInt(sc.nextLine());
         int indexDelete = getIndexById(CategoryId);
         if (indexDelete != -1) {
-            for (int i = indexDelete; i < indexCategory-1; i++) {
-                categories[i] = categories[i + 1];
+            boolean isExit = false;
+            for (int i = 0; i < MenuBook.indexBooks; i++){
+                if (MenuBook.books[i].getCategory().getId() == CategoryId){
+                    isExit = true;
+                }
             }
-            indexCategory--;
+            if (isExit) {
+                System.err.println("This Category has many book so cant delete");
+            }else {
+                for (int i = indexDelete; i < indexCategory-1; i++) {
+                    categories[i] = categories[i + 1];
+                }
+                indexCategory--;
+            }
+
         } else {
             System.out.println("There is no Category with id to delete" + CategoryId);
         }

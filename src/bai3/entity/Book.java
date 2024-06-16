@@ -136,6 +136,33 @@ public class Book implements IBaseOject{
         } while (true);
     }
 
+    public String updateProductTittle(Scanner scanner, int indexUpdate) {
+        System.out.println("Nhập vào tiêu đề quyển sách: ");
+        String regex = "\\w{6,50}";
+        do {
+            String title = scanner.nextLine();
+            if (Pattern.matches(regex, title)) {
+                boolean isExist = false;
+                for (int i = 0; i < MenuBook.indexBooks; i++) {
+                    if(i!=indexUpdate){
+                        if (MenuBook.books[i].getTitle().equals(title)) {
+                            isExist = true;
+                        }
+                    }
+                }
+                if (isExist) {
+                    System.err.println("Tiêu đề không được trùng");
+                } else {
+                    return title;
+                }
+            } else {
+                System.err.println("Tiêu đề phải có từ 6 -> 50 ký tự");
+            }
+        } while (true);
+    }
+
+
+
     public String inputAuthor(Scanner scanner) {
         System.out.println("Nhập vào tên tác giả: ");
         do {
